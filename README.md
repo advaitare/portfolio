@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Advait Tare — Portfolio
+
+A cinematic, scroll-driven personal portfolio built to push the boundaries of what a developer portfolio can feel like. The hero section features a 119-frame scroll-linked image sequence rendered on an HTML5 `<canvas>`, creating a film-like experience as you scroll. Parallax text overlays animate in and out in sync with the canvas frames, transitioning seamlessly into a rich resume section below. Built with **Next.js 14**, **Framer Motion**, and **Tailwind CSS**, the site features a dynamic navbar that morphs from a floating pill to a full-width frosted glass bar the moment you enter the resume content — all driven by an `IntersectionObserver` for pixel-perfect timing. The resume features staggered entrance animations, an infinite skills marquee, and an interactive testimonial carousel with auto-play. Every detail — from the Switzer-inspired ultra-tight typography to the `#121212` dark canvas — is designed to leave a lasting impression.
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Animation**: Framer Motion (scroll-linked springs, `useTransform`, `useSpring`)
+- **Styling**: Tailwind CSS v4 with custom design tokens
+- **Smooth Scroll**: Lenis (`@studio-freight/react-lenis`)
+- **Icons**: Lucide React
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view locally.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The fastest way to deploy is with [Vercel](https://vercel.com) — just import this repo and it works out of the box.
