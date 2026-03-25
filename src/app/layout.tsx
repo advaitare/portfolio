@@ -11,7 +11,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Creative Developer Portfolio",
+  title: "ART",
   description: "Scrollytelling interactive portfolio",
 };
 
