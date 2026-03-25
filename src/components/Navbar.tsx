@@ -111,7 +111,7 @@ export default function Navbar() {
       {/* Right Actions */}
       <div className="flex items-center gap-4 md:gap-4 pl-2 md:pl-4 md:border-l border-white/10 shrink-0">
         <a
-          href="https://github.com"
+          href="https://github.com/advaitare"
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-1 text-white/50 hover:text-white transition-colors text-xs md:text-sm font-medium"
