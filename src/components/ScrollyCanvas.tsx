@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 
 const FRAME_COUNT = 119;
+const basePath = process.env.NODE_ENV === "production" ? "/portfolio" : "";
 
 export default function ScrollyCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -25,16 +26,18 @@ export default function ScrollyCanvas() {
     for (let i = 0; i < FRAME_COUNT; i++) {
       const img = new Image();
       const num = (i + 1).toString().padStart(3, "0");
-      img.src = `/hero/ezgif-frame-${num}.png`;
+      img.src = `${basePath}/hero/ezgif-frame-${num}.png`;
 
       if (img.complete) {
         handleLoad();
       } else {
         img.onload = handleLoad;
-        img.onerror = handleLoad; // avoid hanging
+        img.onerror = handleLoad;
       }
+
       loadedImages.push(img);
     }
+
     setImages(loadedImages);
   }, []);
 
@@ -45,7 +48,11 @@ export default function ScrollyCanvas() {
 
   const frameIndex = useTransform(scrollYProgress, [0, 1], [0, FRAME_COUNT - 1]);
 
-  const renderToCanvas = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, img: HTMLImageElement) => {
+  const renderToCanvas = (
+    ctx: CanvasRenderingContext2D,
+    canvas: HTMLCanvasElement,
+    img: HTMLImageElement
+  ) => {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
@@ -61,8 +68,17 @@ export default function ScrollyCanvas() {
     const centerShift_y = (height - img.height * ratio) / 2;
 
     ctx.clearRect(0, 0, width, height);
-    ctx.drawImage(img, 0, 0, img.width, img.height,
-      centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      centerShift_x,
+      centerShift_y,
+      img.width * ratio,
+      img.height * ratio
+    );
   };
 
   useMotionValueEvent(frameIndex, "change", (latest) => {
@@ -84,17 +100,18 @@ export default function ScrollyCanvas() {
       if (ctx) {
         renderToCanvas(ctx, canvasRef.current, images[Math.round(frameIndex.get())]);
       }
+
       const handleResize = () => {
         if (ctx && canvasRef.current) {
           renderToCanvas(ctx, canvasRef.current, images[Math.round(frameIndex.get())]);
         }
       };
+
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }
   }, [isLoaded, images, frameIndex]);
 
-  // Overlay Parallax logic tied to local container scroll. Native arrays prevent Framer Motion v12 clamp bugs.
   const opacity1 = useTransform(scrollYProgress, [0, 0.15, 0.25, 1], [1, 1, 0, 0]);
   const opacity2 = useTransform(scrollYProgress, [0, 0.5, 0.6, 1.0], [0, 0, 1, 1]);
 
@@ -104,8 +121,6 @@ export default function ScrollyCanvas() {
   return (
     <div ref={containerRef} className="h-[350vh] w-full relative">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#121212]">
-
-        {/* Canvas BG */}
         <canvas
           ref={canvasRef}
           className="w-full h-full block"
@@ -115,10 +130,7 @@ export default function ScrollyCanvas() {
           }}
         />
 
-        {/* Render Text Overlays locally within sticky bound */}
         <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center p-8 z-10">
-
-          {/* SECTION 1 */}
           <motion.div
             style={{ opacity: opacity1, y: y1 }}
             className="absolute w-full flex flex-col items-center text-center justify-center"
@@ -145,7 +157,6 @@ export default function ScrollyCanvas() {
             </div>
           </motion.div>
         </div>
-
       </div>
     </div>
   );
